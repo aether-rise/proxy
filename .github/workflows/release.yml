@@ -26,6 +26,10 @@ jobs:
           # Retrieve the short commit SHA from the Lumerin repository
           echo "LUMERIN_COMMIT_SHORT_SHA=$(git -C Morpheus-Lumerin-Node rev-parse --short HEAD)" >> $GITHUB_ENV
 
+      - name: Copy .env.example to .env
+        run: |
+          cp Morpheus-Lumerin-Node/proxy-router/.env.example Morpheus-Lumerin-Node/proxy-router/.env
+
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
