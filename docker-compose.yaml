@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  proxy-router:
+    image: ghcr.io/aether-rise/proxy:latest
+    environment:
+      - WALLET_PRIVATE_KEY=[yourprivatekey]
+      - OPENAI_BASE_URL=http://ollama:11434/v1
+      - ETH_NODE_ADDRESS=wss://arb-sepolia.g.alchemy.com/v2/[your_alchemy_app_key]
+      - EXPLORER_API_URL="https://api-sepolia.arbiscan.io/api"
+    ports:
+      - 8080:8080
+      - 8082:8082
+      - 3333:3333
+    depends_on:
+      - ollama
+    volumes:
+      - ./proxy-router/logs:/app/logs
+      - ~/go/pkg/mod:/go/pkg/mod
+    networks:
+      - proxy_network
+
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["/docker-compose-startup.sh"]
+    environment:
+      - OLLAMA_NUM_PARALLEL=4
+    volumes:
+      - ollamaconfig:/root/.ollama
+      - ./docker-compose-startup.sh:/docker-compose-startup.sh
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+    networks:
+      - proxy_network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  ollamaconfig:
+
+networks:
+  proxy_network:
