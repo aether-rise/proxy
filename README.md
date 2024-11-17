@@ -13,11 +13,26 @@ This repository includes a `docker-compose.yml` file for setting up the Proxy Ro
 
 2. Start the services with:
 
-   ```bash
-   docker-compose up -d
-   ```
+    ```bash
+    docker compose up -d
+    ```
+     - This will start both the `proxy-router` and `ollama` services, exposing the necessary ports. The setup will use GPU resources for the `ollama` container if available.
 
-This will start both the `proxy-router` and `ollama` services, exposing the necessary ports. The setup will use GPU resources for the `ollama` container if available.
+3. Verify proxy-router shows "started watching events, address 0x1234556..":
+  
+    ```bash
+    docker compose logs
+    ```
+
+4. Verify proxy and llm instance are running by opening
+`http://localhost:8082/swagger/index.html#/chat/post_v1_chat_completions`
+  
+    - Click 'try it out'
+
+    - Click 'execute'
+
+      the response code should be 200 with a response from the llm. 
+
 
 ### Stopping Services
 
