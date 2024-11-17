@@ -6,7 +6,19 @@ services:
       - WALLET_PRIVATE_KEY=[yourprivatekey]
       - OPENAI_BASE_URL=http://ollama:11434/v1
       - ETH_NODE_ADDRESS=wss://arb-sepolia.g.alchemy.com/v2/[your_alchemy_app_key]
-      - EXPLORER_API_URL="https://api-sepolia.arbiscan.io/api"
+      - EXPLORER_API_URL=https://api-sepolia.arbiscan.io/api
+      - DIAMOND_CONTRACT_ADDRESS=0x10777866547c53cbd69b02c5c76369d7e24e7b10
+      - MOR_TOKEN_ADDRESS=0x34a285a1b1c166420df5b6630132542923b5b27e
+      - ETH_NODE_CHAIN_ID=421614
+
+      - ETH_NODE_USE_SUBSCRIPTIONS=false
+      - ENVIRONMENT=development
+      - ETH_NODE_LEGACY_TX=false
+      - PROXY_STORE_CHAT_CONTEXT=true
+      - PROXY_STORAGE_PATH=./data/
+      - LOG_COLOR=true
+      - WEB_ADDRESS=0.0.0.0:8082
+      - WEB_PUBLIC_URL=http://localhost:8082
     ports:
       - 8080:8080
       - 8082:8082
