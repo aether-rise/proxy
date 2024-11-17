@@ -20,7 +20,6 @@ services:
       - WEB_ADDRESS=0.0.0.0:8082
       - WEB_PUBLIC_URL=http://localhost:8082
     ports:
-      - 8080:8080
       - 8082:8082
       - 3333:3333
     depends_on:
@@ -41,7 +40,7 @@ services:
       - ollamaconfig:/root/.ollama
       - ./docker-compose-startup.sh:/docker-compose-startup.sh
     ports:
-      - "11434:11434"
+      - "127.0.0.1:11434:11434"
     restart: unless-stopped
     networks:
       - proxy_network
@@ -58,3 +57,6 @@ volumes:
 
 networks:
   proxy_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "0.0.0.0"
