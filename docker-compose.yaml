@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   proxy-router:
-    image: ghcr.io/aether-rise/proxy:latest
+    image: ghcr.io/aether-rise/proxy:test-latest
     environment:
       - WALLET_PRIVATE_KEY=[yourprivatekey]
       - OPENAI_BASE_URL=http://ollama:11434/v1
