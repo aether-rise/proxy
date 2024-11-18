@@ -25,7 +25,7 @@ services:
     depends_on:
       - ollama
     volumes:
-      - ~/go/pkg/mod:/go/pkg/mod
+      - ${PWD}/models-config.json:/app/models-config.json
 
   ollama:
     image: ollama/ollama
